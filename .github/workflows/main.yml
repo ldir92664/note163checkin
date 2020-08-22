@@ -1,4 +1,4 @@
-name: note163Checkin
+name: 签到
 
 on:
   push:
@@ -6,7 +6,9 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: 0 2 * * *
+    - cron: 10 2 * * *
+  watch:
+    types: started
 
 jobs:
   build:
@@ -15,16 +17,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install Python
+    - name: 初始化 Python
       run: |
         sudo apt update && \
         sudo apt install python3
       
-    - name: requirements
+    - name: 安装运行条件
       run: |
         pip3 install requests
         
-    - name: Checkin
+    - name: 签到
       run: |
         user='${{ secrets.USER }}'
         pwd='${{ secrets.PWD }}'
